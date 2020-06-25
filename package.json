@@ -1,0 +1,20 @@
+{
+  "name": "@Streeterxs/TodosApp",
+  "version": "1.0.0",
+  "description": "Monoreposotiry for a Todos App with GraphQL, Relay, RecoilJS, React Native, Relay Hooks, GraphQL Server",
+  "author": "Streeterxs <afonso_mg3@hotmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": ["./packages/*"],
+  "scripts": {
+    "android": "yarn workspace @StreeterxsTodos/mobile android",
+    "ios": "yarn workspace @StreeterxsTodos/mobile ios",
+    "start:mobile": "yarn workspace @StreeterxsTodos/mobile start",
+    "test": "yarn workspace @StreeterxsTodos/mobile test",
+    "lint": "yarn workspace @StreeterxsTodos/mobile lint"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "get-yarn-workspaces": "^1.0.2"
+  }
+}
