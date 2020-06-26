@@ -13,10 +13,13 @@
     "ios": "yarn workspace @StreeterxsTodos/mobile ios",
     "start:mobile": "yarn workspace @StreeterxsTodos/mobile start",
     "test": "yarn workspace @StreeterxsTodos/mobile test",
-    "lint": "yarn workspace @StreeterxsTodos/mobile lint"
+    "lint": "yarn workspace @StreeterxsTodos/mobile lint",
+    "server": "yarn workspace @StreeterxsTodos/backend start",
+    "server:build": "yarn workspace @StreeterxsTodos/backend build"
   },
   "dependencies": {},
   "devDependencies": {
-    "get-yarn-workspaces": "^1.0.2"
+    "get-yarn-workspaces": "^1.0.2",
+    "typescript": "^3.8.3"
   }
 }
