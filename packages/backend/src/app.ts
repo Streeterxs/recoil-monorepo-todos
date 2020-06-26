@@ -18,8 +18,6 @@ import getCurrentUser from './auth';
 
 dotenv.config({path: path.join(__dirname, '/./../.env')});
 
-mongoose.connect(process.env.MONGODB_URL, {useNewUrlParser: true, useUnifiedTopology: true});
-
 const router = new Router();
 const app = new Koa();
 

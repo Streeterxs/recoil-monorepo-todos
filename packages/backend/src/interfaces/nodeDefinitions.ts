@@ -7,7 +7,7 @@ export const {nodeInterface, nodeField, nodesField} = nodeDefinitions(
       const registeredType = registeredTypes.find(x => {
         return type === x.name
       });
-      return registeredType.loader(id);
+      return registeredType?.loader(id);
     },
     (obj) => {
       const registeredType = registeredTypes.find(x => obj instanceof x.dbType);

@@ -22,7 +22,7 @@ type ConnectionParams = {
   const subscriptionServer = SubscriptionServer.create(
     {
       onConnect: async (connectionParams: ConnectionParams) => {
-        const me = await getCurrentUser(connectionParams.authorization);
+        const me = await getCurrentUser(connectionParams.authorization ? connectionParams.authorization : '');
         return {
           req: {},
           me

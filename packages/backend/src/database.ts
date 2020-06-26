@@ -4,6 +4,7 @@ import config from './config';
 export const connectDatabase = () => {
 
     return new Promise((resolve, reject) => {
+        console.log('config: ', config.dburl);
 
         mongoose.Promise = global.Promise;
         mongoose.connection
@@ -11,7 +12,7 @@ export const connectDatabase = () => {
             .on('close', () => console.log('Database connection closed.'))
             .once('open', () => resolve(mongoose.connections[0]));
 
-        mongoose.connect(config.dburl, {
+        mongoose.connect(config.dburl ? config.dburl : '', {
             useNewUrlParser: true,
             useCreateIndex: true,
             useUnifiedTopology: true

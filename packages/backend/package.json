@@ -6,7 +6,8 @@
   "scripts": {
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "babel": "babel-node --extensions \".es6,.js,.es,.jsx,.mjs,.ts,.tsx\"",
-    "build": "tsc --watch",
+    "build": "npm run clear && babel src --extensions \".es6,.js,.es,.jsx,.mjs,.ts\" --ignore *.spec.js --out-dir dist --copy-files",
+    "clear": "rimraf ./dist",
     "start": "nodemon --exec npm run babel .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -32,7 +33,8 @@
     "@types/koa-router": "^7.4.1",
     "@types/mongoose": "^5.7.8",
     "@types/ws": "^7.2.5",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "rimraf": "^3.0.2"
   },
   "dependencies": {
     "bcrypt": "^4.0.1",
