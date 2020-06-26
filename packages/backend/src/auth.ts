@@ -1,7 +1,5 @@
 
-type getCurrentUserType = {
-    (identifier: string): Promise<any | {me: null}>
-};
+type getCurrentUserType = (identifier: string) => Promise<any | {me: null}>;
 
 const getCurrentUser: getCurrentUserType = async (identifier: string) => {
     try {
