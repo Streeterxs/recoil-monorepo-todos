@@ -5,9 +5,10 @@
   "author": "Streeterxs <afonso_mg3@hotmail.com>",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "./packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]},
   "scripts": {
     "android": "yarn workspace @StreeterxsTodos/mobile android",
     "ios": "yarn workspace @StreeterxsTodos/mobile ios",
@@ -19,6 +20,32 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@types/graphql": "^14.2.2",
+    "@types/graphql-relay": "^0.4.11",
+    "@types/bcrypt": "^3.0.0",
+    "@types/dotenv-safe": "^8.1.0",
+    "@types/ioredis": "^4.16.2",
+    "@types/jsonwebtoken": "^8.3.8",
+    "@types/kcors": "^2.2.3",
+    "@types/koa": "^2.11.3",
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-graphql": "^0.8.3",
+    "@types/koa-logger": "^3.1.1",
+    "@types/koa-router": "^7.4.1",
+    "@types/mongoose": "^5.7.8",
+    "@types/jest": "^24.0.24",
+    "@types/react-native": "^0.62.0",
+    "@types/react-native-dotenv": "^0.2.0",
+    "@types/react-relay": "^7.0.7",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/react-test-renderer": "16.9.2",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
+    "@types/ws": "^7.2.5",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
     "get-yarn-workspaces": "^1.0.2",
     "typescript": "^3.8.3"
   }
