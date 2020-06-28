@@ -15,6 +15,7 @@ import { GraphQLError } from 'graphql';
 
 import Schema from './schema/Schema';
 import getCurrentUser from './auth';
+import { IUser } from './modules/user/UserModel';
 
 dotenv.config({path: path.join(__dirname, '/./../.env')});
 
@@ -26,7 +27,7 @@ app.use(cors());
 
 const graphqlSettings = async (req: any) => {
 
-    const me: any | {me: null} = await getCurrentUser(req.headers.authorization);
+    const me: IUser | {me: null} = await getCurrentUser(req.headers.authorization);
 
     return {
         graphql: true,

@@ -1,9 +1,12 @@
+import User from "../modules/user/UserModel";
+import { userLoader } from "../modules/user/UserLoader";
+
 const registeredTypes = [
     {
-        name: '',
-        qlType: '',
-        dbType: {} as any,
-        loader: (id: string) => ({})
+        name: 'User',
+        qlType: 'UserType',
+        dbType: User,
+        loader: userLoader
     }
 ]
 
