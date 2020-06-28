@@ -2,8 +2,9 @@ import mongoose, {Schema} from 'mongoose';
 
 export interface IUser extends mongoose.Document {
     identifier: string;
-    createdAt: Date;
-    updatedAt: Date;
+    todos: string[];
+    createdAt: number;
+    updatedAt: number;
 }
 
 export interface IUserModel extends mongoose.Model<IUser> {
@@ -14,6 +15,9 @@ const userSchema = new Schema({
     identifier: {
         type: String,
         unique: true
+    },
+    todos: {
+        type: [String]
     }
 }, {timestamps: true});
 

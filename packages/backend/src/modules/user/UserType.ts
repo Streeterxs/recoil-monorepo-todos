@@ -1,6 +1,9 @@
 import { GraphQLObjectType, GraphQLString } from 'graphql';
 
 import { IUser } from './UserModel';
+import { TodosConnection } from '../todos/TodosType';
+import { todosLoader } from '../todos/TodosLoader';
+import { connectionArgs, connectionFromArray } from 'graphql-relay';
 
 
 const userType = new GraphQLObjectType<IUser>({
@@ -11,6 +14,11 @@ const userType = new GraphQLObjectType<IUser>({
             identifier: {
                 type: GraphQLString,
                 resolve: (user) => user.identifier
+            },
+            todos: {
+                type: TodosConnection,
+                args: connectionArgs,
+                resolve: (user, args) => connectionFromArray(user.todos.map(todo => todosLoader(todo)), args)
             },
             createdAt: {
                 type: GraphQLString,
