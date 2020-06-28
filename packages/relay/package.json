@@ -1,0 +1,15 @@
+{
+  "name": "@StreeterxsTodos/relay",
+  "version": "0.0.1",
+  "description": "",
+  "main": "none",
+  "dependencies": {
+    "react-relay": "^0.0.0-experimental-94e87455",
+    "relay-runtime": "^9.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Streeterxs <afonso_mg3@hotmail.com>",
+  "license": "ISC"
+}
