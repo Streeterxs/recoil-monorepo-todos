@@ -8,7 +8,7 @@
  * @format
  */
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -25,6 +25,10 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import { RelayEnvironmentProvider, useRelayEnvironment } from 'react-relay/hooks';
+import environmentModule from '@StreeterxsTodos/relay';
+
+import config from './config';
 
 declare const global: {HermesInternal: null | {}};
 
@@ -76,6 +80,22 @@ const App = () => {
   );
 };
 
+const AppRoot = () => {
+
+  const fallback = (
+    <Text>
+      Loading...
+    </Text>
+  )
+  return (
+    <RelayEnvironmentProvider environment={environmentModule(`${config.GRAPHQL_URL}`, '124')}>
+      <Suspense fallback={fallback}>
+        <App/>
+      </Suspense>
+    </RelayEnvironmentProvider>
+  )
+}
+
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
@@ -115,4 +135,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default AppRoot;
