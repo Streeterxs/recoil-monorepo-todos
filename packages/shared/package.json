@@ -1,0 +1,12 @@
+{
+  "name": "@StreeterxsTodos/shared",
+  "version": "0.0.1",
+  "main": "none",
+  "author": "Streeterxs <afonso_mg3@hotmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "react-dom": "^0.0.0-experimental-7f28234f8",
+    "react-native-web": "^0.13.0"
+  }
+}
