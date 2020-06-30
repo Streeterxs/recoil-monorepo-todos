@@ -2,12 +2,20 @@
   "name": "@StreeterxsTodos/relay",
   "version": "0.0.1",
   "description": "",
-  "main": "none",
+  "private": true,
+  "main": "./distTs",
   "dependencies": {
-    "react-relay": "^0.0.0-experimental-94e87455",
     "relay-runtime": "^9.1.0"
   },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.10.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.8.3"
+  },
   "scripts": {
+    "babel": "babel-node --extensions \".es6,.js,.es,.jsx,.mjs,.ts,.tsx\"",
+    "build": "npm run clear && babel Services --extensions \".es6,.js,.es,.jsx,.mjs,.ts\" --ignore *.spec.js --out-dir distTs --copy-files",
+    "clear": "rimraf ./distTs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Streeterxs <afonso_mg3@hotmail.com>",
