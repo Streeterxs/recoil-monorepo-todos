@@ -1,13 +1,24 @@
 {
   "name": "@StreeterxsTodos/shared",
   "version": "0.0.1",
-  "main": "none",
+  "main": "./src",
   "author": "Streeterxs <afonso_mg3@hotmail.com>",
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "babel-plugin-module-resolver": "^4.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-native-web": "^0.13.0"
+  },
+  "devDependencies": {
+    "@Streeterxs/babel":"^0.0.1",
+    "rimraf": "^3.0.2"
+  },
+  "scripts": {
+    "babel": "babel-node --extensions \".es6,.js,.es,.jsx,.mjs,.ts,.tsx\"",
+    "build": "npm run clear && babel src --extensions \".es6,.js,.es,.jsx,.mjs,.ts,.tsx\" --ignore *.spec.js --out-dir distTs --copy-files",
+    "clear": "rimraf ./distTs",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
