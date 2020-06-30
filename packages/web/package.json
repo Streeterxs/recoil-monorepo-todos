@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@StreeterxsTodos/relay": "^0.0.1",
+    "@StreeterxsTodos/shared": "^0.0.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -14,12 +15,19 @@
     "relay-runtime": "^9.1.0"
   },
   "devDependencies": {
+    "@Streeterxs/babel":"^0.0.1",
     "babel-plugin-relay": "^9.0.0",
     "graphql": "^14.4.1",
-    "relay-compiler": "^9.1.0"
+    "relay-compiler": "^9.1.0",
+    "webpack-merge": "4.2.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.9.0",
+    "dotenv-webpack": "^1.7.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.3.0-beta.3",
+    "babel-loader": "^8.0.6"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "webpack-dev-server --hot",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
