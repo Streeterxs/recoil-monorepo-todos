@@ -3,17 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@StreeterxsTodos/relay": "^0.0.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "@StreeterxsTodos/relay":"^0.0.1",
-    "react": "^0.0.0-experimental-7f28234f8",
-    "react-dom": "^0.0.0-experimental-7f28234f8",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-relay": "^0.0.0-experimental-94e87455",
     "react-scripts": "3.4.1",
     "relay-runtime": "^9.1.0"
   },
   "devDependencies": {
+    "babel-plugin-relay": "^9.0.0",
+    "graphql": "^14.4.1",
     "relay-compiler": "^9.1.0"
   },
   "scripts": {

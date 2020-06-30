@@ -5,12 +5,11 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.unstable_createRoot(
-  document.getElementById('root') as HTMLElement
-).render(
+ReactDOM.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root') as HTMLElement
 )
 
 // If you want your app to work offline and load faster, you can change

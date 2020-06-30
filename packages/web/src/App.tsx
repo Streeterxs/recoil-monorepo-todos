@@ -1,5 +1,5 @@
-import React, { Suspense } from 'react';
-import { RelayEnvironmentProvider, useRelayEnvironment } from 'react-relay/hooks';
+import React, { Suspense, useEffect } from 'react';
+import { RelayEnvironmentProvider } from 'react-relay/hooks';
 
 import environmentModule from '@StreeterxsTodos/relay';
 
@@ -29,8 +29,14 @@ function App() {
 }
 
 const AppRoot = () => {
+  const environment = environmentModule(`${config.GRAPHQL_URL}`, '123')
+
+  useEffect(() => {
+    console.log('environment: ', environment);
+  });
+
   return (
-    <RelayEnvironmentProvider environment={environmentModule(`${config.GRAPHQL_URL}`, '123')}>
+    <RelayEnvironmentProvider environment={environment}>
       <Suspense fallback="is loading...">
         <App/>
       </Suspense>
