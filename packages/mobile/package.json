@@ -12,7 +12,7 @@
     "relay": "yarn run relay-compiler --schema ./schema/schema.graphql --src ./src/ --watchman false $@ --language typescript"
   },
   "dependencies": {
-    "react": "16.11.0",
+    "react": "^16.13.1",
     "react-native": "0.62.2",
     "@StreeterxsTodos/relay":"^0.0.1",
     "react-relay": "^0.0.0-experimental-94e87455",
@@ -25,7 +25,7 @@
     "babel-jest": "^24.9.0",
     "babel-plugin-relay": "^9.1.0",
     "eslint": "^6.5.1",
-    "graphql": "^14",
+    "graphql": "^14.4.1",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.58.0",
     "prettier": "^2.0.4",
