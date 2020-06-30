@@ -6,7 +6,8 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "react-dom": "^0.0.0-experimental-7f28234f8",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-native-web": "^0.13.0"
   }
 }
