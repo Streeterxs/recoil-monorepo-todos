@@ -26,7 +26,7 @@
     "bcrypt": "^4.0.1",
     "dotenv": "^8.2.0",
     "dotenv-safe": "^8.2.0",
-    "graphql": "^14",
+    "graphql": "^14.4.1",
     "graphql-playground-middleware-koa": "^1.6.13",
     "graphql-relay": "^0.6.0",
     "graphql-relay-subscription": "^0.2.1",
