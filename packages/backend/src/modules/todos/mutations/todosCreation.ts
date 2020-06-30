@@ -10,10 +10,7 @@ const todosCreation = mutationWithClientMutationId({
     name: 'todosCreation',
     description: 'todos Creation',
     inputFields: {
-        title: {
-            type: new GraphQLNonNull(GraphQLString)
-        },
-        description: {
+        content: {
             type: new GraphQLNonNull(GraphQLString)
         }
     },

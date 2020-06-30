@@ -10,13 +10,9 @@ const TodosType = new GraphQLObjectType<ITodos>({
     description: 'Todos type',
     fields: {
         id: globalIdField('Todos'),
-        title: {
+        content: {
             type: GraphQLString,
-            resolve: (todos) => todos.title
-        },
-        description: {
-            type: GraphQLString,
-            resolve: (todos) => todos.description
+            resolve: (todos) => todos.content
         },
         createdAt: {
             type: GraphQLString,

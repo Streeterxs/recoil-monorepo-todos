@@ -1,17 +1,13 @@
 import mongoose, { Schema } from 'mongoose';
 
 export interface ITodos extends mongoose.Document {
-    title: string;
-    description: string;
+    content: string;
     createdAt: number;
     updatedAt: number;
 }
 
 const todosModel = new Schema ({
-    title: {
-        type: String
-    },
-    description: {
+    content: {
         type: String
     }
 }, {timestamps: true});
