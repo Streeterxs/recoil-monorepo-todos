@@ -1,15 +1,39 @@
 import React, { Suspense, useEffect } from 'react';
 import { RelayEnvironmentProvider } from 'react-relay/hooks';
+import { RecoilRoot, atom, useRecoilState } from 'recoil';
+import jwt from 'jsonwebtoken';
 
-import {TextInput, View, Button} from 'react-native';
-
-import environmentModule from '@StreeterxsTodos/relay';
+import {environmentModule, useCreationMutation} from '@StreeterxsTodos/relay';
 import { TodoCreation } from '@StreeterxsTodos/shared';
 
 import config from './config';
 
+const {environment, setAuthentication} = environmentModule(`${config.GRAPHQL_URL}`, JSON.stringify(localStorage.getItem('authToken')));
+
+const authTokenState = atom({
+  key: 'authToken',
+  default: JSON.stringify(localStorage.getItem('authToken')),
+});
+
 function App() {
-  console.log('TodoCreation: ', TodoCreation);
+  const [userCreationCommitMutation, userCreationIsInFlight] = useCreationMutation();
+  const [token, setToken] = useRecoilState(authTokenState);
+
+  const commitUserCreation = () => {}
+
+  useEffect(() => {
+    setAuthentication(token);
+  }, [token]);
+
+  useEffect(() => {
+    if (!token) {
+      (() => {
+        const jwtReturn = jwt.sign({token: 'token'}, process.env.REACT_APP_PRIVATE_KEY as string);
+        setToken(jwtReturn);
+      })();
+    }
+  }, []);
+
   return (
     <div className="App">
       <TodoCreation onNewTodo={() => {}} onTodoEdit={() => {}}/>
@@ -17,19 +41,19 @@ function App() {
   );
 }
 
-const {environment, setAuthentication} = environmentModule(`${config.GRAPHQL_URL}`, '123');
-
 const AppRoot = () => {
 
   useEffect(() => {
-    console.log('environment: ', environment);
+    console.log('Carregou app root!!');
   });
 
   return (
     <RelayEnvironmentProvider environment={environment}>
-      <Suspense fallback="is loading...">
-        <App/>
-      </Suspense>
+      <RecoilRoot>
+        <Suspense fallback="is loading...">
+          <App/>
+        </Suspense>
+      </RecoilRoot>
     </RelayEnvironmentProvider>
   );
 }
