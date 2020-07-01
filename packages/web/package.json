@@ -15,16 +15,17 @@
     "relay-runtime": "^9.1.0"
   },
   "devDependencies": {
-    "@Streeterxs/babel":"^0.0.1",
+    "@Streeterxs/babel": "^0.0.1",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.3.0-beta.3",
+    "babel-loader": "^8.0.6",
     "babel-plugin-relay": "^9.0.0",
+    "dotenv-webpack": "^1.7.0",
     "graphql": "^14.4.1",
+    "html-webpack-plugin": "4.2.0",
     "relay-compiler": "^9.1.0",
-    "webpack-merge": "4.2.2",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.9.0",
-    "dotenv-webpack": "^1.7.0",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.3.0-beta.3",
-    "babel-loader": "^8.0.6"
+    "webpack-merge": "4.2.2"
   },
   "scripts": {
     "start": "webpack-dev-server --hot",
