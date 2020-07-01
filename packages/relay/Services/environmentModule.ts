@@ -1,7 +1,20 @@
 import { RequestParameters, Variables, Network, Environment, RecordSource, Store } from "relay-runtime";
 
-type environmentModuleType = (url: string, auth: string) => Environment;
+type environmentModuleReturn = {
+    environment: Environment,
+    setAuthentication(newAuth: string): void
+}
+type environmentModuleType = (url: string, auth: string) => environmentModuleReturn;
 const environmentModule: environmentModuleType = (url, auth) => {
+    let authentication = auth;
+
+    const getAuthentication = () => {
+        return authentication
+    }
+
+    const setAuthentication = (newAuth: string) => {
+        authentication = newAuth;
+    }
 
     async function fetchGraphQL(request: RequestParameters, variables: Variables) {
 
@@ -10,7 +23,7 @@ const environmentModule: environmentModuleType = (url, auth) => {
             headers: {
                 Accept: 'application/json',
                 'Content-type': 'application/json',
-                Authorization: auth
+                Authorization: getAuthentication()
             },
             body: JSON.stringify({
                 query: request.text,
@@ -31,7 +44,7 @@ const environmentModule: environmentModuleType = (url, auth) => {
         store: new Store(new RecordSource())
     });
 
-    return environment;
+    return {environment, setAuthentication};
 };
 
 export default environmentModule;

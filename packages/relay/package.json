@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "private": true,
-  "main": "./distTs",
+  "main": "./Services",
   "dependencies": {
     "relay-runtime": "^9.1.0"
   },
