@@ -3,11 +3,15 @@
   "version": "0.0.1",
   "description": "",
   "private": true,
-  "main": "./Services",
+  "main": "./src/index",
   "dependencies": {
-    "relay-runtime": "^9.1.0"
+    "relay-compiler-language-typescript": "^12.0.3",
+    "react-relay": "^0.0.0-experimental-94e87455",
+    "relay-runtime": "^9.1.0",
+    "relay-compiler": "^9.1.0"
   },
   "devDependencies": {
+    "@Streeterxs/babel": "^0.0.1",
     "@babel/preset-typescript": "^7.10.1",
     "rimraf": "^3.0.2",
     "typescript": "^3.8.3"
@@ -16,7 +20,8 @@
     "babel": "babel-node --extensions \".es6,.js,.es,.jsx,.mjs,.ts,.tsx\"",
     "build": "npm run clear && babel Services --extensions \".es6,.js,.es,.jsx,.mjs,.ts\" --ignore *.spec.js --out-dir distTs --copy-files",
     "clear": "rimraf ./distTs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "relay": "yarn run relay-compiler --schema ../../schema/schema.graphql --src ./src/ --watchman false $@ --language typescript"
   },
   "author": "Streeterxs <afonso_mg3@hotmail.com>",
   "license": "ISC"

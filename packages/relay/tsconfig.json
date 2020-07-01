@@ -60,7 +60,7 @@
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
   },
   "include": [
-      "Services/**/*"
+      "src/**/*"
   ],
   "exclude": [
     "node_modules", ".babelrc"
