@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect } from 'react';
 import { RelayEnvironmentProvider } from 'react-relay/hooks';
 
-import {TextInput, View} from 'react-native';
+import {TextInput, View, Button} from 'react-native';
 
 import environmentModule from '@StreeterxsTodos/relay';
 import { TodoCreation } from '@StreeterxsTodos/shared';
@@ -13,15 +13,13 @@ function App() {
   return (
     <div className="App">
       <TodoCreation onNewTodo={() => {}} onTodoEdit={() => {}}/>
-      <View>
-        <TextInput/>
-      </View>
     </div>
   );
 }
 
+const {environment, setAuthentication} = environmentModule(`${config.GRAPHQL_URL}`, '123');
+
 const AppRoot = () => {
-  const environment = environmentModule(`${config.GRAPHQL_URL}`, '123')
 
   useEffect(() => {
     console.log('environment: ', environment);
