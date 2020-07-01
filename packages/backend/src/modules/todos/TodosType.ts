@@ -9,6 +9,7 @@ const TodosType = new GraphQLObjectType<ITodos>({
     name: 'TodosType',
     description: 'Todos type',
     fields: {
+        // TODO correct types
         id: globalIdField('Todos'),
         content: {
             type: GraphQLString,
@@ -27,6 +28,7 @@ const TodosType = new GraphQLObjectType<ITodos>({
 });
 
 export const {connectionType: TodosConnection} =
+        // TODO correct types
         connectionDefinitions({nodeType: GraphQLNonNull(TodosType)});
 
 export default TodosType;

@@ -9,6 +9,7 @@ import { connectionArgs, connectionFromArray } from 'graphql-relay';
 const userType = new GraphQLObjectType<IUser>({
     name: 'UserType',
     description: 'User type',
+    // TODO correct types
     fields: () => (
         {
             identifier: {

@@ -8,7 +8,7 @@ export const mutation = mutationWithClientMutationId({
     name: 'UserCreation',
     description: 'Create new user',
     inputFields: {
-        name: {
+        identifier: {
             type: new GraphQLNonNull(GraphQLString),
         }
     },

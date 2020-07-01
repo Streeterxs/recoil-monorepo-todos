@@ -13,7 +13,7 @@ import koaPlayground from 'graphql-playground-middleware-koa';
 
 import { GraphQLError } from 'graphql';
 
-import Schema from './schema/Schema';
+import Schema from './schema';
 import getCurrentUser from './auth';
 import { IUser } from './modules/user/UserModel';
 
@@ -24,6 +24,8 @@ const app = new Koa();
 
 app.use(logger());
 app.use(cors());
+
+console.log('Schema: ', Schema);
 
 const graphqlSettings = async (req: any) => {
 

@@ -24,7 +24,7 @@ const userSchema = new Schema({
 
 userSchema.statics.findUserByIdentifier = async (identifier: string) => {
     try {
-        const userFinded = User.findOne({identifier});
+        const userFinded = await User.findOne({identifier});
         return userFinded;
     } catch (error) {
         console.log('error: ', error);
