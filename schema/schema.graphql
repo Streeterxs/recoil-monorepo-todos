@@ -1,0 +1,101 @@
+schema {
+  query: QueryType
+  mutation: MutationType
+}
+
+"""Exposes a URL that specifies the behaviour of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behaviour of this scalar."""
+  url: String!
+) on SCALAR
+
+"""Mutation types"""
+type MutationType {
+  """todos Creation"""
+  todosCreation(input: todosCreationInput!): todosCreationPayload
+
+  """Create new user"""
+  UserCreationMutation(input: UserCreationInput!): UserCreationPayload
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+"""Graphql type for queries"""
+type QueryType {
+  myTodos: undefinedConnection
+}
+
+input todosCreationInput {
+  content: String!
+  clientMutationId: String
+}
+
+type todosCreationPayload {
+  todos: TodosType!
+  clientMutationId: String
+}
+
+"""Todos type"""
+type TodosType implements Node {
+  """The ID of an object"""
+  id: ID!
+  content: String
+  createdAt: String
+  updatedAt: String
+}
+
+"""A connection to a list of items."""
+type undefinedConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [undefinedEdge]
+}
+
+"""An edge in a connection."""
+type undefinedEdge {
+  """The item at the end of the edge"""
+  node: TodosType!
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+input UserCreationInput {
+  identifier: String!
+  clientMutationId: String
+}
+
+type UserCreationPayload {
+  user: UserType!
+  clientMutationId: String
+}
+
+"""User type"""
+type UserType {
+  identifier: String
+  todos(after: String, first: Int, before: String, last: Int): undefinedConnection
+  createdAt: String
+  updatedAt: String
+}
+
