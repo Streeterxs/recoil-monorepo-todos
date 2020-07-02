@@ -19,6 +19,8 @@ export const mutation = mutationWithClientMutationId({
         }
     },
     mutateAndGetPayload: async ({identifier}) => {
+        console.log('identifier: ', identifier);
+        console.log('ENTERED USER CREATION MUTATION');
         try {
             const newUser = new userModel({identifier});
             const returnNewUser = await newUser.save();

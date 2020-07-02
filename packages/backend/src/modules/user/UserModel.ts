@@ -32,6 +32,6 @@ userSchema.statics.findUserByIdentifier = async (identifier: string) => {
 }
 
 
-const User = mongoose.model<IUser, IUserModel>('User', userSchema);
+const User = mongoose.model<IUser, IUserModel>('User_todo', userSchema);
 
 export default User;

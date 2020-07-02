@@ -15,10 +15,8 @@ type ConnectionParams = {
   await connectDatabase();
   const server = createServer(app.callback());
 
-  console.log('Schema: ', Schema);
-
   server.listen('3333', () => {
-      console.log('O servidor foi iniciado');
+      console.log('Server is on');
   });
 
   const subscriptionServer = SubscriptionServer.create(

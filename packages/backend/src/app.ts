@@ -25,8 +25,6 @@ const app = new Koa();
 app.use(logger());
 app.use(cors());
 
-console.log('Schema: ', Schema);
-
 const graphqlSettings = async (req: any) => {
 
     const me: IUser | {me: null} = await getCurrentUser(req.headers.authorization);

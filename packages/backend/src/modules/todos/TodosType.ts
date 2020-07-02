@@ -29,6 +29,7 @@ const TodosType = new GraphQLObjectType<ITodos>({
 
 export const {connectionType: TodosConnection} =
         // TODO correct types
-        connectionDefinitions({nodeType: GraphQLNonNull(TodosType)});
+        // Don't use GraphQLNonNull or 'undefinedConnection' is created
+        connectionDefinitions({nodeType: TodosType});
 
 export default TodosType;

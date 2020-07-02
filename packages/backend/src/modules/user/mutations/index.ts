@@ -1,5 +1,5 @@
-import { default as UserCreationMutation} from './createUser';
+import { default as UserCreation} from './createUser';
 
 export default {
-    UserCreationMutation
+    UserCreation
 };
