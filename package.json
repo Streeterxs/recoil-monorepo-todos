@@ -10,15 +10,17 @@
       "packages/*"
     ]},
   "scripts": {
+    "delete:node_modules": "find . -name \"node_modules\" -exec rm -rf '{}' +",
     "android": "yarn workspace @StreeterxsTodos/mobile android",
     "ios": "yarn workspace @StreeterxsTodos/mobile ios",
     "start:mobile": "yarn workspace @StreeterxsTodos/mobile start",
     "start:web": "yarn workspace @StreeterxsTodos/web start",
-    "relay:build": "yarn workspace @StreeterxsTodos/relay build",
+    "relay:build": "yarn workspace @StreeterxsTodos/relay relay",
     "shared:build": "yarn workspace @StreeterxsTodos/shared build",
     "test": "yarn workspace @StreeterxsTodos/mobile test",
     "lint": "yarn workspace @StreeterxsTodos/mobile lint",
     "server": "yarn workspace @StreeterxsTodos/backend start",
+    "server:clear:users": "yarn workspace @StreeterxsTodos/backend database:clear:users",
     "server:build": "yarn workspace @StreeterxsTodos/backend build"
   },
   "devDependencies": {
