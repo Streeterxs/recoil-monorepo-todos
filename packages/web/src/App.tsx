@@ -1,38 +1,21 @@
 import React, { Suspense, useEffect } from 'react';
 import { RelayEnvironmentProvider } from 'react-relay/hooks';
-import { RecoilRoot, atom, useRecoilState } from 'recoil';
-import jwt from 'jsonwebtoken';
+import { RecoilRoot, useRecoilState } from 'recoil';
 
-import {environmentModule, useCreationMutation} from '@StreeterxsTodos/relay';
+import { useTodosQuery } from '@StreeterxsTodos/relay';
 import { TodoCreation } from '@StreeterxsTodos/shared';
-
-import config from './config';
-
-const {environment, setAuthentication} = environmentModule(`${config.GRAPHQL_URL}`, JSON.stringify(localStorage.getItem('authToken')));
-
-const authTokenState = atom({
-  key: 'authToken',
-  default: JSON.stringify(localStorage.getItem('authToken')),
-});
+import { useAuthentication } from './Hooks';
+import { environmentState } from './Store';
 
 function App() {
-  const [userCreationCommitMutation, userCreationIsInFlight] = useCreationMutation();
-  const [token, setToken] = useRecoilState(authTokenState);
 
-  const commitUserCreation = () => {}
+  console.log('Rerender app');
 
-  useEffect(() => {
-    setAuthentication(token);
-  }, [token]);
+  const [login, logout, isLogged] = useAuthentication();
+  const fetchTodos = useTodosQuery();
+  const { myTodos } = fetchTodos();
 
-  useEffect(() => {
-    if (!token) {
-      (() => {
-        const jwtReturn = jwt.sign({token: 'token'}, process.env.REACT_APP_PRIVATE_KEY as string);
-        setToken(jwtReturn);
-      })();
-    }
-  }, []);
+  // useEffect(() => {console.log('my todos change');}, [myTodos]);
 
   return (
     <div className="App">
@@ -48,14 +31,30 @@ const AppRoot = () => {
   });
 
   return (
+    <RecoilRoot>
+      <AppRelayEnvironmentMidware/>
+    </RecoilRoot>
+  );
+}
+
+const AppRelayEnvironmentMidware = () => {
+  console.log('Rerender relay environment app');
+  const [environment] = useRecoilState(environmentState);
+
+  useEffect(() => {
+    console.log('Carregou app relay midware!!');
+  });
+
+  useEffect(() => {console.log('environment change');}, [environment]);
+
+  return (
     <RelayEnvironmentProvider environment={environment}>
-      <RecoilRoot>
-        <Suspense fallback="is loading...">
-          <App/>
-        </Suspense>
-      </RecoilRoot>
+      <Suspense fallback="is loading...">
+        <App/>
+      </Suspense>
     </RelayEnvironmentProvider>
   );
+
 }
 
 export default AppRoot;
