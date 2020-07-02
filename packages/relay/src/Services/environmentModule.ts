@@ -1,10 +1,13 @@
 import { RequestParameters, Variables, Network, Environment, RecordSource, Store } from "relay-runtime";
 
-type environmentModuleReturn = {
+export type environmentModuleReturn = {
     environment: Environment,
-    setAuthentication(newAuth: string): void
-}
+    setAuthentication(newAuth: string): void,
+    getAuthentication(): string
+};
+
 type environmentModuleType = (url: string, auth: string) => environmentModuleReturn;
+
 const environmentModule: environmentModuleType = (url, auth) => {
     let authentication = auth;
 
@@ -44,7 +47,7 @@ const environmentModule: environmentModuleType = (url, auth) => {
         store: new Store(new RecordSource())
     });
 
-    return {environment, setAuthentication};
+    return {environment, setAuthentication, getAuthentication};
 };
 
 export default environmentModule;
