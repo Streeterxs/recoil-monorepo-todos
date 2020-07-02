@@ -22,6 +22,8 @@ module.exports = {
                     "^react-native$": "react-native-web"
                 }
             }
-        ]        
+        ],
+        // Babel identify optional chaining '?' operations
+        '@babel/plugin-proposal-optional-chaining',
     ],
 };
