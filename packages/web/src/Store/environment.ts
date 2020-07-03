@@ -16,12 +16,5 @@ export const environmentState = atom<RelayModernEnvironment>({
     key: 'environment',
     default: environment
 });
-export const setAuthenticationFnState = atom<(newAuth: string) => void>({
-    key: 'setAuthenticationState',
-    default: setAuthentication
-});
-export const getAuthenticationFnState = atom<() => string | null>({
-    key: 'getAuthentication',
-    default: getAuthentication
-});
 
+export { setAuthentication, getAuthentication };
