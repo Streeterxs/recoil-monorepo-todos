@@ -8,7 +8,7 @@ import { useCreationMutation } from './__generated__/useCreationMutation.graphql
 
 
 const userCreationMutation = graphql`
-    mutation useCreationMutation($identifier: String!) {
+    mutation userCreationMutation($identifier: String!) {
         UserCreation (input: {identifier: $identifier, clientMutationId: "1"}) {
             user {
                 identifier
@@ -19,7 +19,7 @@ const userCreationMutation = graphql`
     }
 `;
 
-const useCreationMutationHook = () => {
+const userCreationMutationHook = () => {
     const userCreationMutationCallback = useCallback(() => useMutation<useCreationMutation>(userCreationMutation), []);
 
     useEffect(() => {
@@ -30,4 +30,4 @@ const useCreationMutationHook = () => {
 
 };
 
-export default useCreationMutationHook;
+export default userCreationMutationHook;
