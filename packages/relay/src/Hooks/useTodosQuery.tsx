@@ -7,8 +7,13 @@ import { useTodosQuery } from './__generated__/useTodosQuery.graphql';
 
 
 const todosFetchQuery = graphql`
-    query useTodosQuery {
-        myTodos {
+    query useTodosQuery ($first: Int, $last: Int, $before: String, $after: String) {
+        myTodos(
+            first: $first,
+            last: $last,
+            before: $before,
+            after: $after
+        ) @connection(key: "connection_myTodos") {
             edges {
                 cursor
                 node {
@@ -29,7 +34,12 @@ const todosFetchQuery = graphql`
 `;
 
 const useTodosQueryHook = () => {
-    const commitQueryFetch = useCallback(() => useLazyLoadQuery<useTodosQuery>(todosFetchQuery, {}, {fetchPolicy: 'store-or-network'}), []);
+    const commitQueryFetch = useCallback(() => useLazyLoadQuery<useTodosQuery>(todosFetchQuery, {
+        first: 30,
+        last: null,
+        before: null,
+        after: "opaqueCursor"
+    }, {fetchPolicy: 'store-or-network'}), []);
 
     useEffect(() => {
         console.log('useEffect useTodosQuery');

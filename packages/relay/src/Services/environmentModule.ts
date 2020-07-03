@@ -3,10 +3,10 @@ import { RequestParameters, Variables, Network, Environment, RecordSource, Store
 export type environmentModuleReturn = {
     environment: Environment,
     setAuthentication(newAuth: string): void,
-    getAuthentication(): string
+    getAuthentication(): string | null
 };
 
-type environmentModuleType = (url: string, auth: string) => environmentModuleReturn;
+type environmentModuleType = (url: string, auth: string | null) => environmentModuleReturn;
 
 const environmentModule: environmentModuleType = (url, auth) => {
     let authentication = auth;
@@ -26,7 +26,7 @@ const environmentModule: environmentModuleType = (url, auth) => {
             headers: {
                 Accept: 'application/json',
                 'Content-type': 'application/json',
-                Authorization: getAuthentication()
+                Authorization: `${getAuthentication()}`
             },
             body: JSON.stringify({
                 query: request.text,
