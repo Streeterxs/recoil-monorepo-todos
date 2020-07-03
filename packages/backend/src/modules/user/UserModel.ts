@@ -17,7 +17,9 @@ const userSchema = new Schema({
         unique: true
     },
     todos: {
-        type: [String]
+        type: [String],
+        default: [],
+        required: true
     }
 }, {timestamps: true});
 

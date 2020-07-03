@@ -9,6 +9,7 @@
     "build": "npm run clear && babel src --extensions \".es6,.js,.es,.jsx,.mjs,.ts\" --ignore *.spec.js --out-dir dist --copy-files",
     "clear": "rimraf ./dist",
     "database:clear:users": "npm run babel ./src/scripts/clearUsers",
+    "database:clear:todos": "npm run babel ./src/scripts/clearTodos",
     "prestart": "npm run build",
     "start": "nodemon .",
     "test": "echo \"Error: no test specified\" && exit 1"

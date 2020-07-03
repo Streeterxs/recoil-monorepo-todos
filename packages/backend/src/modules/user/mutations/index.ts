@@ -1,5 +1,5 @@
-import { default as UserCreation} from './createUser';
+import UserCreation from './createUser';
 
 export default {
-    UserCreation
+    UserCreation,
 };

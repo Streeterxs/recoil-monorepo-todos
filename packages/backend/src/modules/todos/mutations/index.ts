@@ -1,5 +1,5 @@
-import { default as todosCreation } from './todosCreation';
+import TodosCreation from './todosCreation';
 
 export default {
-    todosCreation
+    TodosCreation,
 }

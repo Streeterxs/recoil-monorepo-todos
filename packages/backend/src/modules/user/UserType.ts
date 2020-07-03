@@ -17,7 +17,7 @@ const userType = new GraphQLObjectType<IUser>({
                 resolve: (user) => user.identifier
             },
             todos: {
-                type: TodosConnection,
+                type: TodosConnection.connectionType,
                 args: connectionArgs,
                 resolve: (user, args) => connectionFromArray(user.todos.map(todo => todosLoader(todo)), args)
             },
