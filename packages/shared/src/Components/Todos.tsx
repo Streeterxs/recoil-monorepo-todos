@@ -9,7 +9,7 @@ type TodosProps = {
 }
 const Todos = ({todos}: TodosProps) => {
     return (
-        <FlatList data={todos} renderItem={({item}) => <Todo todo={item}/>}/>
+        <FlatList data={todos} renderItem={({item}) => <Todo key={item.id} todo={item}/>}/>
     );
 };
 
