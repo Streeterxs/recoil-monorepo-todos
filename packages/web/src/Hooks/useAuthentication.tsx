@@ -4,7 +4,7 @@ import { Disposable } from 'react-relay';
 import jwt from 'jsonwebtoken';
 
 import { useCreationMutation } from '@StreeterxsTodos/relay';
-import { setAuthenticationState, getAuthenticationState } from '../Store';
+import { setAuthenticationFnState, getAuthenticationFnState } from '../Store';
 
 type useAuthenticationReturnType = [(authToken: string) => void, () => void, () => boolean];
 
@@ -12,8 +12,8 @@ const useAuthentication = (): useAuthenticationReturnType => {
 
   // console.log('Rerender use authentication');
 
-  const [setAuthentication] = useRecoilState(setAuthenticationState);
-  const [getAuthentication] = useRecoilState(getAuthenticationState);
+  const [setAuthentication] = useRecoilState(setAuthenticationFnState);
+  const [getAuthentication] = useRecoilState(getAuthenticationFnState);
 
   const [userCreationCommitMutation, isInFlight] = useCreationMutation()();
 
@@ -28,7 +28,7 @@ const useAuthentication = (): useAuthenticationReturnType => {
   }, []);
 
   const isLogged = useCallback(() => {
-      return getAuthentication() ? getAuthentication().length > 0 : false
+    return getAuthentication() ? (getAuthentication() as string).length > 0 : false
   }, []);
 
   const commitUserCreation = (identifier: string) => {
@@ -43,14 +43,15 @@ const useAuthentication = (): useAuthenticationReturnType => {
       },
       onError: (err) => {
 
-        console.log(err);
+        logout();
+        console.log('error: ', err);
       }
     });
   }
 
 
   useEffect(() => {
-
+    // console.log('isLogged: ', isLogged());
     if (!isLogged()) {
 
       let disposable: Disposable;
@@ -67,10 +68,6 @@ const useAuthentication = (): useAuthenticationReturnType => {
       }
     }
   }, []);
-
-  useEffect(() => {console.log('useEffect login')}, [login]);
-  useEffect(() => {console.log('useEffect logout')}, [logout]);
-  useEffect(() => {console.log('useEffect isLogged')}, [isLogged]);
 
   return [
       login,

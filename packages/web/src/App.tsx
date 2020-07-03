@@ -2,24 +2,28 @@ import React, { Suspense, useEffect } from 'react';
 import { RelayEnvironmentProvider } from 'react-relay/hooks';
 import { RecoilRoot, useRecoilState } from 'recoil';
 
-import { useTodosQuery } from '@StreeterxsTodos/relay';
-import { TodoCreation } from '@StreeterxsTodos/shared';
+import { TodoCreation, Todos } from '@StreeterxsTodos/shared';
 import { useAuthentication } from './Hooks';
 import { environmentState } from './Store';
+import useTodos from './Hooks/useTodos';
 
 function App() {
 
-  console.log('Rerender app');
+  // console.log('Rerender app');
+
+  let contentToCreate = '';
 
   const [login, logout, isLogged] = useAuthentication();
-  const fetchTodos = useTodosQuery();
-  const { myTodos } = fetchTodos();
+  const [todos, createTodo, todoCreationIsInFlight] = useTodos();
 
-  // useEffect(() => {console.log('my todos change');}, [myTodos]);
+  // useEffect(() => {console.log('useEffect app')});
 
   return (
     <div className="App">
-      <TodoCreation onNewTodo={() => {}} onTodoEdit={() => {}}/>
+      <TodoCreation onNewTodo={createTodo} onTodoEdit={console.log}/>
+      <div>
+        <Todos todos={todos}/>
+      </div>
     </div>
   );
 }
@@ -27,7 +31,7 @@ function App() {
 const AppRoot = () => {
 
   useEffect(() => {
-    console.log('Carregou app root!!');
+    // console.log('Carregou app root!!');
   });
 
   return (
@@ -38,14 +42,14 @@ const AppRoot = () => {
 }
 
 const AppRelayEnvironmentMidware = () => {
-  console.log('Rerender relay environment app');
+  //console.log('Rerender relay environment app');
   const [environment] = useRecoilState(environmentState);
 
   useEffect(() => {
-    console.log('Carregou app relay midware!!');
+    // console.log('Carregou app relay midware!!');
   });
 
-  useEffect(() => {console.log('environment change');}, [environment]);
+  // useEffect(() => {console.log('environment change');}, [environment]);
 
   return (
     <RelayEnvironmentProvider environment={environment}>

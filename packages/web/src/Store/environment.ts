@@ -10,17 +10,17 @@ const {
     environment,
     setAuthentication,
     getAuthentication
-} = environmentModule(`${config.GRAPHQL_URL}`, JSON.stringify(localStorage.getItem('authToken')));
+} = environmentModule(`${config.GRAPHQL_URL}`, localStorage.getItem('authToken'));
 
 export const environmentState = atom<RelayModernEnvironment>({
     key: 'environment',
     default: environment
 });
-export const setAuthenticationState = atom<(newAuth: string) => void>({
+export const setAuthenticationFnState = atom<(newAuth: string) => void>({
     key: 'setAuthenticationState',
     default: setAuthentication
 });
-export const getAuthenticationState = atom<() => string>({
+export const getAuthenticationFnState = atom<() => string | null>({
     key: 'getAuthentication',
     default: getAuthentication
 });
