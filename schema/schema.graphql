@@ -12,7 +12,7 @@ directive @specifiedBy(
 """Mutation types"""
 type MutationType {
   """todos Creation"""
-  todosCreation(input: todosCreationInput!): todosCreationPayload
+  TodosCreation(input: TodosCreationInput!): TodosCreationPayload
 
   """Create new user"""
   UserCreation(input: UserCreationInput!): UserCreationPayload
@@ -41,16 +41,45 @@ type PageInfo {
 
 """Graphql type for queries"""
 type QueryType {
-  myTodos: TodosTypeConnection
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+
+  """Fetches objects given their IDs"""
+  nodes(
+    """The IDs of objects"""
+    ids: [ID!]!
+  ): [Node]!
+  myTodos(first: Int, last: Int, before: String, after: String): TodoConnection
 }
 
-input todosCreationInput {
+"""A connection to a list of items."""
+type TodoConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [TodoEdge]
+}
+
+"""An edge in a connection."""
+type TodoEdge {
+  """The item at the end of the edge"""
+  node: TodosType
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+input TodosCreationInput {
   content: String!
   clientMutationId: String
 }
 
-type todosCreationPayload {
-  todos: TodosType!
+type TodosCreationPayload {
+  todo: TodoEdge
   clientMutationId: String
 }
 
@@ -61,24 +90,6 @@ type TodosType implements Node {
   content: String
   createdAt: String
   updatedAt: String
-}
-
-"""A connection to a list of items."""
-type TodosTypeConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [TodosTypeEdge]
-}
-
-"""An edge in a connection."""
-type TodosTypeEdge {
-  """The item at the end of the edge"""
-  node: TodosType
-
-  """A cursor for use in pagination"""
-  cursor: String!
 }
 
 input UserCreationInput {
@@ -94,7 +105,7 @@ type UserCreationPayload {
 """User type"""
 type UserType {
   identifier: String
-  todos(after: String, first: Int, before: String, last: Int): TodosTypeConnection
+  todos(after: String, first: Int, before: String, last: Int): TodoConnection
   createdAt: String
   updatedAt: String
 }

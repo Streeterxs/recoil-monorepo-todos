@@ -21,6 +21,7 @@
     "lint": "yarn workspace @StreeterxsTodos/mobile lint",
     "server": "yarn workspace @StreeterxsTodos/backend start",
     "server:clear:users": "yarn workspace @StreeterxsTodos/backend database:clear:users",
+    "server:clear:todos": "yarn workspace @StreeterxsTodos/backend database:clear:todos",
     "server:build": "yarn workspace @StreeterxsTodos/backend build"
   },
   "devDependencies": {
