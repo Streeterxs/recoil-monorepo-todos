@@ -10,3 +10,7 @@ export const todosState = atom<ITodo[]>({
     default: []
 });
 
+export const todoToEditState = atom<ITodo | undefined>({
+    key: 'todoToEditState',
+    default: undefined
+});

@@ -4,7 +4,7 @@ import { RecoilRoot, useRecoilState } from 'recoil';
 
 import { TodoCreation, Todos } from '@StreeterxsTodos/shared';
 import { useAuthentication } from './Hooks';
-import { environmentState } from './Store';
+import { environmentState, todoToEditState } from './Store';
 import useTodos from './Hooks/useTodos';
 
 function App() {
@@ -13,16 +13,34 @@ function App() {
 
   let contentToCreate = '';
 
+  const [todoToEdit, setTodoToEdit] = useRecoilState(todoToEditState);
+
   const [login, logout, isLogged] = useAuthentication();
-  const [todos, createTodo, todoCreationIsInFlight] = useTodos();
+
+  const [
+    todos,
+    createTodo,
+    todoCreationIsInFlight,
+    updateTodo,
+    todoUpdateIsInFlight
+  ] = useTodos();
 
   // useEffect(() => {console.log('useEffect app')});
 
   return (
     <div className="App">
-      <TodoCreation onNewTodo={createTodo} onTodoEdit={console.log}/>
+      <TodoCreation
+      onNewTodo={createTodo}
+      onTodoEdit={(edited) => {
+        console.log(edited);
+        setTodoToEdit(undefined);
+      }}
+      todoToEdit={todoToEdit}/>
       <div>
-        <Todos onTodoDelete={console.log} onTodoEdit={console.log} todos={todos}/>
+        <Todos onTodoDelete={console.log} onTodoEdit={(todo) => {
+          console.log('todo: ', todo);
+          setTodoToEdit(todo)
+          }} todos={todos}/>
       </div>
     </div>
   );

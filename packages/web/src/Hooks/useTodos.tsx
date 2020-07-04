@@ -1,17 +1,22 @@
 import React, { useEffect, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
-
-import { useTodosQuery, useTodoCreationMutation } from '@StreeterxsTodos/relay';
-import { todosState } from '../Store';
-import { todosParser, todoParser } from '../Services';
-import { ITodo } from '@StreeterxsTodos/shared/src';
 import { RecordProxy, ConnectionHandler, ROOT_ID } from 'relay-runtime';
 
-const useTodos = (): [ITodo[], (content: string) => void, boolean] => {
+import {
+    useTodosQuery,
+    useTodoCreationMutation,
+    useTodoUpdateMutation } from '@StreeterxsTodos/relay';
+import { ITodo } from '@StreeterxsTodos/shared/src';
+
+import { todosState } from '../Store';
+import { todosParser, todoParser } from '../Services';
+
+const useTodos = (): [ITodo[], (content: string) => void, boolean, (content: string, id: string) => void, boolean] => {
     const fetchTodos = useTodosQuery();
     const myTodosResponse = fetchTodos();
 
     const [todoCommitCreationMutation, todoCreationIsInFlight] = useTodoCreationMutation()();
+    const [todoCommitUpdateMutation, todoUpdateIsInFlight] = useTodoUpdateMutation()();
 
     const [todos, setTodos] = useRecoilState(todosState);
 
@@ -44,13 +49,29 @@ const useTodos = (): [ITodo[], (content: string) => void, boolean] => {
         })
     }, []);
 
+    const updateTodo = useCallback((content: string, id: string) => {
+
+        todoCommitUpdateMutation({
+            variables: {
+                content,
+                id
+            },
+            onCompleted: (data) => {
+                console.log('data created: ', data);
+            },
+            onError: (err) => {
+                console.log('error: ', err);
+            }
+        })
+    }, []);
+
     useEffect(() => {
         console.log('myTodosResponse: ', myTodosResponse);
         setTodos(todosParser(myTodosResponse));
     }, [myTodosResponse]);
 
 
-    return [todos, createTodo, todoCreationIsInFlight];
+    return [todos, createTodo, todoCreationIsInFlight, updateTodo, todoUpdateIsInFlight];
 };
 
 export default useTodos;
