@@ -6,11 +6,13 @@ import Todo from './Todo'
 
 type TodosProps = {
     todos: ITodo[];
+    onTodoDelete: (todo: ITodo) => void,
+    onTodoEdit: (todo: ITodo) => void
 }
-const Todos = ({todos}: TodosProps) => {
+const Todos = ({todos, onTodoDelete, onTodoEdit}: TodosProps) => {
     return (
         <SafeAreaView style={styles.container}>
-            <FlatList data={todos} renderItem={({item}) => <Todo key={item.id} todo={item}/>}/>
+            <FlatList data={todos} renderItem={({item}) => <Todo onDeleteButtonClick={onTodoDelete} onEditButtonClick={onTodoEdit} key={item.id} todo={item}/>}/>
         </SafeAreaView>
     );
 };

@@ -49,8 +49,10 @@ const styles = StyleSheet.create({
     },
     input: {
         backgroundColor: '#e4e4e4',
+        color: '#2a2a2a',
         height: 40,
         marginBottom: 20,
+        padding: 20
 
     }
 });
