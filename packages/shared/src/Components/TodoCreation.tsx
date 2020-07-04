@@ -1,31 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { ITodo } from '../Models';
 
 export type TodoCreationProps = {
     onNewTodo(text: string): void;
     onTodoEdit(text: string): void;
-    todoToEdit?: string
+    todoToEdit?: ITodo
 };
 
 export type TodoCreationComponent = (props: TodoCreationProps) => any;
 
 const TodoCreation: TodoCreationComponent = ({onNewTodo, onTodoEdit, todoToEdit}) => {
 
+    const [content, setContent] = useState('');
+
     let textInput: TextInput | null;
-    let content = '';
+
+    useEffect(() => {
+        if (todoToEdit) {
+            setContent(todoToEdit?.content);
+        }
+    }, [todoToEdit])
 
     const handleOutput = () => {
 
         if (todoToEdit) {
 
             onTodoEdit(content);
-            textInput?.clear();
-            todoToEdit = undefined;
+            setContent('');
             return;
         }
 
-        textInput?.clear();
+        setContent('');
         onNewTodo(content);
     }
     return (
@@ -33,10 +40,8 @@ const TodoCreation: TodoCreationComponent = ({onNewTodo, onTodoEdit, todoToEdit}
             <TextInput
             style={styles.input}
             ref={input => textInput = input}
-            defaultValue={todoToEdit ? todoToEdit : ''}
-            onChangeText={(event) => {
-                content = event;
-            }}/>
+            value={content}
+            onChangeText={setContent}/>
             <Button title='Submit' onPress={() => handleOutput()}/>
         </View>
     );
