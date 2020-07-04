@@ -22,7 +22,7 @@ function App() {
     <div className="App">
       <TodoCreation onNewTodo={createTodo} onTodoEdit={console.log}/>
       <div>
-        <Todos todos={todos}/>
+        <Todos onTodoDelete={console.log} onTodoEdit={console.log} todos={todos}/>
       </div>
     </div>
   );
