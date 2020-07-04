@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View, TextInput, Button } from 'react-native';
+import { View, TextInput, Button, StyleSheet } from 'react-native';
 
 export type TodoCreationProps = {
     onNewTodo(text: string): void;
@@ -29,8 +29,9 @@ const TodoCreation: TodoCreationComponent = ({onNewTodo, onTodoEdit, todoToEdit}
         onNewTodo(content);
     }
     return (
-        <View>
+        <View style={styles.container}>
             <TextInput
+            style={styles.input}
             ref={input => textInput = input}
             defaultValue={todoToEdit ? todoToEdit : ''}
             onChangeText={(event) => {
@@ -40,5 +41,18 @@ const TodoCreation: TodoCreationComponent = ({onNewTodo, onTodoEdit, todoToEdit}
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        margin: 20
+    },
+    input: {
+        backgroundColor: '#e4e4e4',
+        height: 40,
+        marginBottom: 20,
+
+    }
+});
 
 export default TodoCreation;
