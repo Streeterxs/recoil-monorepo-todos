@@ -26,6 +26,10 @@ function App() {
     [
       updateTodo,
       todoUpdateIsInFlight
+    ],
+    [
+      deleteTodo,
+      todoDeleteIsInFlight
     ]
   ] = useTodos();
 
@@ -46,7 +50,9 @@ function App() {
       }}
       todoToEdit={todoToEdit}/>
       <div>
-        <Todos onTodoDelete={console.log} onTodoEdit={(todo) => {
+        <Todos onTodoDelete={(todo) => {
+          deleteTodo(todo.id)
+        }} onTodoEdit={(todo) => {
           console.log('todo: ', todo);
           setTodoToEdit(todo)
           }} todos={todos}/>
