@@ -17,6 +17,9 @@ type MutationType {
   """todos Update"""
   TodosUpdate(input: TodosUpdateInput!): TodosUpdatePayload
 
+  """todos delete"""
+  TodosDelete(input: TodosDeleteInput!): TodosDeletePayload
+
   """Create new user"""
   UserCreation(input: UserCreationInput!): UserCreationPayload
 }
@@ -82,6 +85,16 @@ input TodosCreationInput {
 }
 
 type TodosCreationPayload {
+  todo: TodoEdge
+  clientMutationId: String
+}
+
+input TodosDeleteInput {
+  id: String!
+  clientMutationId: String
+}
+
+type TodosDeletePayload {
   todo: TodoEdge
   clientMutationId: String
 }
