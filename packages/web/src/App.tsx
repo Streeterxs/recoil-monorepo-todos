@@ -19,10 +19,14 @@ function App() {
 
   const [
     todos,
-    createTodo,
-    todoCreationIsInFlight,
-    updateTodo,
-    todoUpdateIsInFlight
+    [
+      createTodo,
+      todoCreationIsInFlight
+    ],
+    [
+      updateTodo,
+      todoUpdateIsInFlight
+    ]
   ] = useTodos();
 
   // useEffect(() => {console.log('useEffect app')});
@@ -32,7 +36,12 @@ function App() {
       <TodoCreation
       onNewTodo={createTodo}
       onTodoEdit={(edited) => {
+
         console.log(edited);
+        if (todoToEdit) {
+
+          updateTodo(edited, todoToEdit.id)
+        }
         setTodoToEdit(undefined);
       }}
       todoToEdit={todoToEdit}/>

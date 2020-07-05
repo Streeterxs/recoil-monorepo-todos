@@ -11,7 +11,10 @@ import { ITodo } from '@StreeterxsTodos/shared/src';
 import { todosState } from '../Store';
 import { todosParser, todoParser } from '../Services';
 
-const useTodos = (): [ITodo[], (content: string) => void, boolean, (content: string, id: string) => void, boolean] => {
+const useTodos = (): [
+        ITodo[],
+        [(content: string) => void, boolean],
+        [(content: string, id: string) => void, boolean]] => {
     const fetchTodos = useTodosQuery();
     const myTodosResponse = fetchTodos();
 
@@ -71,7 +74,7 @@ const useTodos = (): [ITodo[], (content: string) => void, boolean, (content: str
     }, [myTodosResponse]);
 
 
-    return [todos, createTodo, todoCreationIsInFlight, updateTodo, todoUpdateIsInFlight];
+    return [todos, [createTodo, todoCreationIsInFlight], [updateTodo, todoUpdateIsInFlight]];
 };
 
 export default useTodos;
