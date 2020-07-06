@@ -29,7 +29,10 @@ const QueryType = new GraphQLObjectType({
                     type: GraphQLString
                 }
             },
-            resolve: (value, args, {me}: {me: IUser}) => connectionFromArray(me.todos.map(async todo => await todosLoader(todo)), args)
+            resolve: (value, args, {me}: {me: IUser}) => {
+                console.log('me: ', me);
+                return connectionFromArray(me.todos.map(async todo => await todosLoader(todo)), args)
+            }
         }
     })
 });
