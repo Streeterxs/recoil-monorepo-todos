@@ -1,10 +1,9 @@
 import react, { useEffect, useCallback } from 'react';
-import { useRecoilState } from 'recoil';
 import { Disposable } from 'react-relay';
-import jwt from 'jsonwebtoken';
 
 import { userCreationMutation } from '@StreeterxsTodos/relay';
 import { setAuthentication, getAuthentication } from '../Store';
+import { Device } from '../Services';
 
 type useAuthenticationReturnType = [(authToken: string) => void, () => void, () => boolean];
 
@@ -16,19 +15,17 @@ const useAuthentication = (): useAuthenticationReturnType => {
 
   const logout = useCallback(() => {
       setAuthentication('');
-      localStorage.removeItem('authToken');
   }, []);
 
   const login = useCallback((authToken: string) => {
       setAuthentication(authToken);
-      localStorage.setItem('authToken', authToken);
   }, []);
 
   const isLogged = useCallback(() => {
     return getAuthentication() ? (getAuthentication() as string).length > 0 : false
   }, []);
 
-  const commitUserCreation = (identifier: string) => {
+  const commitUserCreation = useCallback((identifier: string) => {
     
     return userCreationCommitMutation({
       variables: {identifier},
@@ -44,26 +41,22 @@ const useAuthentication = (): useAuthenticationReturnType => {
         console.log('error: ', err);
       }
     });
-  }
+  }, []);
 
 
   useEffect(() => {
-    // console.log('isLogged: ', isLogged());
-    if (!isLogged()) {
 
-      let disposable: Disposable;
+    let disposable: Disposable;
 
-      (() => {
+    (() => {
 
-        const jwtReturn = jwt.sign({token: 'token'}, process.env.REACT_APP_PRIVATE_KEY as string);
-        disposable = commitUserCreation(jwtReturn);
-      })();
+      Device.getDevice().then(device => {
+        disposable = commitUserCreation(device);
+      })
+    })();
 
-      if (disposable) {
+      return () => {if (disposable) disposable.dispose()}
 
-        return () => disposable.dispose()
-      }
-    }
   }, []);
 
   return [

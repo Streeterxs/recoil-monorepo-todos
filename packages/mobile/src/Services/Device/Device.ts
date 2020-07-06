@@ -1,6 +1,8 @@
 import { asyncStorageModule } from "../asyncStorage";
 import { getUniqueId } from "react-native-device-info";
 
+console.log('device module init');
+
 class Device {
     private _device: string = '';
     private _isFetching = false;
@@ -18,10 +20,13 @@ class Device {
     }
 
     async getDevice() {
+
         if (!this._device && !this._isFetching) {
+
             this._isFetching = true;
             let deviceReturn = await this._deviceAsyncStorageModule.getValue();
             if (!deviceReturn) {
+                
                 deviceReturn = getUniqueId();
                 await this._deviceAsyncStorageModule.setValue(deviceReturn);
             }
