@@ -59,10 +59,7 @@ const useAuthentication = (): useAuthenticationReturnType => {
         disposable = commitUserCreation(jwtReturn);
       })();
 
-      if (disposable) {
-
-        return () => disposable.dispose()
-      }
+        return () => { if (disposable) disposable.dispose() }
     }
   }, []);
 
