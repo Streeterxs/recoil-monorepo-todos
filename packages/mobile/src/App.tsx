@@ -60,6 +60,9 @@ const App = () => {
           }
           setTodoToEdit(undefined);
         }}
+        onClear={() => {
+          setTodoToEdit(undefined)
+        }}
         todoToEdit={todoToEdit}/>
       </View>
 
