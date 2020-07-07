@@ -5,6 +5,7 @@ import { TodosConnection } from "../modules/todos/TodosType";
 import { IUser } from "../modules/user/UserModel";
 import { todosLoader } from "../modules/todos/TodosLoader";
 import { nodeField, nodesField } from "../interfaces/nodeDefinitions";
+import userType from "../modules/user/UserType";
 
 const QueryType = new GraphQLObjectType({
     name: 'QueryType',
@@ -32,6 +33,12 @@ const QueryType = new GraphQLObjectType({
             resolve: (value, args, {me}: {me: IUser}) => {
                 console.log('me: ', me);
                 return connectionFromArray(me.todos.map(async todo => await todosLoader(todo)), args)
+            }
+        },
+        me: {
+            type: userType,
+            resolve: (value, args, {me}) => {
+                return me;
             }
         }
     })
