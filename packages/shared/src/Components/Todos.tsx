@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { FlatList, Text, StyleSheet, View } from 'react-native';
 
 import { ITodo } from '../Models/todo';
 import Todo from './Todo'
@@ -11,16 +11,19 @@ type TodosProps = {
 }
 const Todos = ({todos, onTodoDelete, onTodoEdit}: TodosProps) => {
     return (
-        <SafeAreaView style={styles.container}>
-            <FlatList data={todos} renderItem={({item}) => <Todo onDeleteButtonClick={onTodoDelete} onEditButtonClick={onTodoEdit} key={item.id} todo={item}/>}/>
-        </SafeAreaView>
+      <View style={styles.container}>
+        <FlatList
+          data={todos}
+          renderItem={({item}) => <Todo onDeleteButtonClick={onTodoDelete} onEditButtonClick={onTodoEdit} todo={item}/>}
+          keyExtractor={item => item.id}/>
+      </View>
     );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    margin: 20
+    margin: 20,
+    height: '100%'
   },
   item: {
     backgroundColor: '#f9c2ff',
