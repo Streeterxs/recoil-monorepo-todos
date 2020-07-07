@@ -48,6 +48,9 @@ function App() {
         }
         setTodoToEdit(undefined);
       }}
+      onClear={() => {
+        setTodoToEdit(undefined)
+      }}
       todoToEdit={todoToEdit}/>
       <div>
         <Todos onTodoDelete={(todo) => {
