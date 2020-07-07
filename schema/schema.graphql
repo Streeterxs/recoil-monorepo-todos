@@ -59,6 +59,7 @@ type QueryType {
     ids: [ID!]!
   ): [Node]!
   myTodos(first: Int, last: Int, before: String, after: String): TodoConnection
+  me: UserType
 }
 
 """A connection to a list of items."""
