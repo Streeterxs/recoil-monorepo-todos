@@ -43,23 +43,27 @@ const App = () => {
   ] = useTodos();
 
   return (
-    <>
-      <TodoCreation
-      onNewTodo={(todo) => {
-        console.log('todo: ', todo);
-        createTodo(todo)
-      }}
-      onTodoEdit={(edited) => {
+    <SafeAreaView style={styles.container}>
 
-        console.log(edited);
-        if (todoToEdit) {
+      <View style={styles.creationContainer}>
+        <TodoCreation
+        onNewTodo={(todo) => {
+          console.log('todo: ', todo);
+          createTodo(todo)
+        }}
+        onTodoEdit={(edited) => {
 
-          updateTodo(edited, todoToEdit.id)
-        }
-        setTodoToEdit(undefined);
-      }}
-      todoToEdit={todoToEdit}/>
-      <View>
+          console.log(edited);
+          if (todoToEdit) {
+
+            updateTodo(edited, todoToEdit.id)
+          }
+          setTodoToEdit(undefined);
+        }}
+        todoToEdit={todoToEdit}/>
+      </View>
+
+      <SafeAreaView style={styles.list}>
         <Todos
           onTodoDelete={
           (todo) => {
@@ -73,8 +77,9 @@ const App = () => {
               setTodoToEdit(todo)
             }} todos={todos}
           />
-      </View>
-    </>
+      </SafeAreaView>
+
+    </SafeAreaView>
   );
 };
 
@@ -106,5 +111,17 @@ const AppRelayEnvironmentMidware = () => {
   );
 
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  list: {
+    flex: 1
+  },
+  creationContainer: {
+    height: 110
+  }
+});
 
 export default AppRoot;
