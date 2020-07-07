@@ -1,17 +1,16 @@
-import react, { useEffect, useCallback } from 'react';
+import react, { useEffect, useCallback, useMemo } from 'react';
 import { Disposable } from 'react-relay';
 
-import { userCreationMutation } from '@StreeterxsTodos/relay';
-import { setAuthentication, getAuthentication } from '../Store';
+import { userCreationMutation, userMeQueryHook } from '@StreeterxsTodos/relay';
+import { setAuthentication, getAuthentication, deviceSelector } from '../Store';
 import { Device } from '../Services';
+import { useRecoilValue } from 'recoil';
 
 type useAuthenticationReturnType = [(authToken: string) => void, () => void, () => boolean];
 
 const useAuthentication = (): useAuthenticationReturnType => {
 
   // console.log('Rerender use authentication');
-
-  const [userCreationCommitMutation, isInFlight] = userCreationMutation()();
 
   const logout = useCallback(() => {
       setAuthentication('');
@@ -24,6 +23,11 @@ const useAuthentication = (): useAuthenticationReturnType => {
   const isLogged = useCallback(() => {
     return getAuthentication() ? (getAuthentication() as string).length > 0 : false
   }, []);
+
+  const device = useRecoilValue(deviceSelector);
+
+  const [userCreationCommitMutation, isInFlight] = userCreationMutation()();
+  const { me } = userMeQueryHook()();
 
   const commitUserCreation = useCallback((identifier: string) => {
     
@@ -43,20 +47,18 @@ const useAuthentication = (): useAuthenticationReturnType => {
     });
   }, []);
 
-
   useEffect(() => {
 
     let disposable: Disposable;
+    if (!me) {
+  
+      (() => {
+        commitUserCreation(device);
+      })();
 
-    (() => {
+    }
 
-      Device.getDevice().then(device => {
-        disposable = commitUserCreation(device);
-      })
-    })();
-
-      return () => {if (disposable) disposable.dispose()}
-
+    return () => { if (disposable) disposable.dispose() }
   }, []);
 
   return [

@@ -91,6 +91,8 @@ const AppRelayEnvironmentMidware = () => {
 
   const [environment] = useRecoilState(environmentState);
 
+  console.log('environment: ', environment);
+
   return (
     <RelayEnvironmentProvider environment={environment}>
       <Suspense fallback={

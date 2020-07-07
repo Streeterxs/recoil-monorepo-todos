@@ -10,20 +10,18 @@ const {
     getAuthentication
 } = environmentModule(`http://192.168.1.2:3333/graphql`, '');
 
-Device.getDevice().then(device => {
-    console.log('device: ', device);
-    setAuthentication(device);
-});
-
 export const environmentState = atom<RelayModernEnvironment>({
     key: 'environment',
     default: environment
 });
 
-export const deviceSelector = selector<string | null>({
+export const deviceSelector = selector<string>({
     key: 'device',
     get: async () => {
-        return await Device.getDevice()
+        const device = await Device.getDevice();
+        setAuthentication(device);
+
+        return device 
     }
 });
 
