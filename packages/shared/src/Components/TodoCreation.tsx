@@ -6,12 +6,13 @@ import { ITodo } from '../Models';
 export type TodoCreationProps = {
     onNewTodo(text: string): void;
     onTodoEdit(text: string): void;
+    onClear(): void;
     todoToEdit?: ITodo
 };
 
 export type TodoCreationComponent = (props: TodoCreationProps) => any;
 
-const TodoCreation: TodoCreationComponent = ({onNewTodo, onTodoEdit, todoToEdit}) => {
+const TodoCreation: TodoCreationComponent = ({onNewTodo, onTodoEdit, onClear, todoToEdit}) => {
 
     const [content, setContent] = useState('');
 
@@ -35,6 +36,12 @@ const TodoCreation: TodoCreationComponent = ({onNewTodo, onTodoEdit, todoToEdit}
         setContent('');
         onNewTodo(content);
     }
+
+    const handleClear = () => {
+        setContent('');
+        onClear();
+    }
+
     return (
         <View style={styles.container}>
             <TextInput
@@ -42,7 +49,14 @@ const TodoCreation: TodoCreationComponent = ({onNewTodo, onTodoEdit, todoToEdit}
             ref={input => textInput = input}
             value={content}
             onChangeText={setContent}/>
-            <Button title='Submit' onPress={() => handleOutput()}/>
+            <View style={styles.buttons}>
+                <View style={styles.button}>
+                    <Button title='Clear' onPress={() => handleClear()}/>
+                </View>
+                <View style={styles.button}>
+                    <Button title='Submit' onPress={() => handleOutput()}/>
+                </View>
+            </View>
         </View>
     );
 };
@@ -58,6 +72,16 @@ const styles = StyleSheet.create({
         height: 40,
         marginBottom: 20
 
+    },
+    buttons: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexDirection: 'row'
+    },
+    button: {
+        flexGrow: 1,
+        marginHorizontal: 10
     }
 });
 
