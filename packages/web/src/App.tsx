@@ -8,11 +8,6 @@ import { environmentState, todoToEditState } from './Store';
 import useTodos from './Hooks/useTodos';
 
 function App() {
-
-  // console.log('Rerender app');
-
-  let contentToCreate = '';
-
   const [todoToEdit, setTodoToEdit] = useRecoilState(todoToEditState);
 
   const [login, logout, isLogged] = useAuthentication();

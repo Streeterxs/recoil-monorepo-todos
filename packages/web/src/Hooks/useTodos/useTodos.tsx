@@ -13,7 +13,7 @@ const useTodos = (): [
         [(id: string) => void, boolean]
     ] => {
 
-    const [todos] = useGetTodos();
+    const todos = useGetTodos();
     const [createTodo, todoCreationIsInFlight] = useCreateTodo();
     const [updateTodo, todoUpdateIsInFlight] = useUpdateTodo();
     const [deleteTodo, todoDeleteIsInFlight] = useDeleteTodo();
