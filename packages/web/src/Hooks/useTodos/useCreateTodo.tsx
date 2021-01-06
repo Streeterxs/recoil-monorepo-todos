@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
 
-import { useTodoCreationMutation } from '@StreeterxsTodos/relay';
+import { useTodoCreation } from '@StreeterxsTodos/relay';
 import { RecordProxy, ConnectionHandler } from 'relay-runtime';
 
 const useCreateTodo = (): [(content: string) => void, boolean] => {
 
-    const [todoCommitCreationMutation, todoCreationIsInFlight] = useTodoCreationMutation()();
+    const [todoCommitCreationMutation, todoCreationIsInFlight] = useTodoCreation()();
 
 
     const createTodo = useCallback((content: string) => {
@@ -22,6 +22,9 @@ const useCreateTodo = (): [(content: string) => void, boolean] => {
             },
             updater: store => {
 
+                console.log('updater');
+                const todosCreationMutation = store.getRootField('TodosCreation');
+                console.log('todosCreationMutation: ', todosCreationMutation);
                 const todoEdge = (store.getRootField('TodosCreation') as RecordProxy<{}>).getLinkedRecord('todo') as RecordProxy<{}>;
                 const conn = ConnectionHandler.getConnection(store.getRoot() as RecordProxy<{}>, 'connection_myTodos') as RecordProxy<{}>;
                 console.log('conn: ', conn);

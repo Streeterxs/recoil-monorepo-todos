@@ -3,19 +3,19 @@ import { graphql } from 'react-relay';
 import { useLazyLoadQuery } from 'react-relay/hooks';
 
 // to generate this file, yarn relay:build root package.json script must be executed
-import { userMeQuery } from './__generated__/userMeQuery.graphql';
+import { useMeQuery } from './__generated__/useMeQuery.graphql';
 
 
 const userMeQueryGraphql = graphql`
-    query userMeQuery {
+    query useMeQuery {
         me {
             identifier
         }
     }
 `;
 
-const userMeQueryHook = () => {
-    const commitMeQuery = useCallback(() => useLazyLoadQuery<userMeQuery>(userMeQueryGraphql, {}, {fetchPolicy: 'store-or-network'}), []);
+export const useMe = () => {
+    const commitMeQuery = useCallback(() => useLazyLoadQuery<useMeQuery>(userMeQueryGraphql, {}, {fetchPolicy: 'store-or-network'}), []);
 
     useEffect(() => {
         console.log('useEffect userMeQuery');
@@ -24,5 +24,3 @@ const userMeQueryHook = () => {
     return commitMeQuery;
 
 };
-
-export default userMeQueryHook;

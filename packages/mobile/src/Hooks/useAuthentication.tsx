@@ -1,7 +1,7 @@
 import react, { useEffect, useCallback, useMemo } from 'react';
 import { Disposable } from 'react-relay';
 
-import { userCreationMutation, userMeQueryHook } from '@StreeterxsTodos/relay';
+import { useUserCreation, useMe } from '@StreeterxsTodos/relay';
 import { setAuthentication, getAuthentication, deviceSelector } from '../Store';
 import { Device } from '../Services';
 import { useRecoilValue } from 'recoil';
@@ -26,8 +26,8 @@ const useAuthentication = (): useAuthenticationReturnType => {
 
   const device = useRecoilValue(deviceSelector);
 
-  const [userCreationCommitMutation, isInFlight] = userCreationMutation()();
-  const { me } = userMeQueryHook()();
+  const [userCreationCommitMutation, isInFlight] = useUserCreation()();
+  const { me } = useMe()();
 
   const commitUserCreation = useCallback((identifier: string) => {
     

@@ -3,11 +3,11 @@ import { graphql, Disposable } from 'react-relay';
 import { useMutation } from 'react-relay/hooks';
 
 // to generate this file, yarn relay:build root package.json script must be executed
-import { userCreationMutation } from './__generated__/userCreationMutation.graphql';
+import { useUserCreationMutation } from './__generated__/useUserCreationMutation.graphql';
 
 
 const userCreationMutationGraphQL = graphql`
-    mutation userCreationMutation($identifier: String!) {
+    mutation useUserCreationMutation($identifier: String!) {
         UserCreation (input: {identifier: $identifier, clientMutationId: "1"}) {
             user {
                 identifier
@@ -18,8 +18,8 @@ const userCreationMutationGraphQL = graphql`
     }
 `;
 
-const userCreationMutationHook = () => {
-    const userCreationMutationCallback = useCallback(() => useMutation<userCreationMutation>(userCreationMutationGraphQL), []);
+export const useUserCreation = () => {
+    const userCreationMutationCallback = useCallback(() => useMutation<useUserCreationMutation>(userCreationMutationGraphQL), []);
 
     useEffect(() => {
         console.log('useEffect useCreationMutation');
@@ -29,4 +29,3 @@ const userCreationMutationHook = () => {
 
 };
 
-export default userCreationMutationHook;
