@@ -12,8 +12,11 @@ const useAuthentication = (): useAuthenticationReturnType => {
 
   // console.log('Rerender use authentication');
 
-  const [userCreationCommitMutation, isInFlight] = useUserCreation()();
-  const me = useMe()();
+  const userCreation = useUserCreation();
+  const [userCreationCommitMutation, isInFlight] = userCreation();
+
+  const fetchMe = useMe();
+  const { me } = fetchMe();
 
   const logout = useCallback(() => {
       setAuthentication('');
