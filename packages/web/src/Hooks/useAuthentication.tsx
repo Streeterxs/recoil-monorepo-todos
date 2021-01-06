@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 import { Disposable } from 'react-relay';
 import jwt from 'jsonwebtoken';
 
-import { userCreationMutation, userMeQueryHook } from '@StreeterxsTodos/relay';
+import { useUserCreation, useMe } from '@StreeterxsTodos/relay';
 import { setAuthentication, getAuthentication } from '../Store';
 
 type useAuthenticationReturnType = [(authToken: string) => void, () => void, () => boolean];
@@ -12,8 +12,8 @@ const useAuthentication = (): useAuthenticationReturnType => {
 
   // console.log('Rerender use authentication');
 
-  const [userCreationCommitMutation, isInFlight] = userCreationMutation()();
-  const me = userMeQueryHook()();
+  const [userCreationCommitMutation, isInFlight] = useUserCreation()();
+  const me = useMe()();
 
   const logout = useCallback(() => {
       setAuthentication('');

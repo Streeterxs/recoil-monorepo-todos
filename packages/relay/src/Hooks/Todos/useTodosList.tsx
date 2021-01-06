@@ -3,11 +3,11 @@ import { graphql } from 'react-relay';
 import { useLazyLoadQuery } from 'react-relay/hooks';
 
 // to generate this file, yarn relay:build root package.json script must be executed
-import { useTodosQuery } from './__generated__/useTodosQuery.graphql';
+import { useTodosListQuery } from './__generated__/useTodosListQuery.graphql';
 
 
 const todosFetchQuery = graphql`
-    query useTodosQuery ($first: Int, $last: Int, $before: String, $after: String) {
+    query useTodosListQuery ($first: Int, $last: Int, $before: String, $after: String) {
         myTodos(
             first: $first,
             last: $last,
@@ -33,8 +33,8 @@ const todosFetchQuery = graphql`
     }
 `;
 
-const useTodosQueryHook = () => {
-    const commitQueryFetch = useCallback(() => useLazyLoadQuery<useTodosQuery>(todosFetchQuery, {
+export const useTodosList = () => {
+    const commitQueryFetch = useCallback(() => useLazyLoadQuery<useTodosListQuery>(todosFetchQuery, {
         first: 30,
         last: null,
         before: null,
@@ -48,5 +48,3 @@ const useTodosQueryHook = () => {
     return commitQueryFetch;
 
 };
-
-export default useTodosQueryHook;

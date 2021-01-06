@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
 
-import { useTodoCreationMutation } from '@StreeterxsTodos/relay';
+import { useTodoCreation } from '@StreeterxsTodos/relay';
 import { RecordProxy, ConnectionHandler } from 'relay-runtime';
 
 const useCreateTodo = (): [(content: string) => void, boolean] => {
 
-    const [todoCommitCreationMutation, todoCreationIsInFlight] = useTodoCreationMutation()();
+    const [todoCommitCreationMutation, todoCreationIsInFlight] = useTodoCreation()();
 
 
     const createTodo = useCallback((content: string) => {

@@ -22,7 +22,7 @@ const todoUpdateMutation = graphql`
     }
 `;
 
-const useTodoUpdateMutationHook = () => {
+export const useTodoUpdate = () => {
     const useTodoUpdateMutationCallback = useCallback(() => useMutation<useTodoUpdateMutation>(todoUpdateMutation), []);
 
     useEffect(() => {
@@ -32,5 +32,3 @@ const useTodoUpdateMutationHook = () => {
     return useTodoUpdateMutationCallback;
 
 };
-
-export default useTodoUpdateMutationHook;

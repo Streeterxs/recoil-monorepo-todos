@@ -23,7 +23,7 @@ const todoCreationMutation = graphql`
     }
 `;
 
-const useTodoCreationMutationHook = () => {
+export const useTodoCreation = () => {
     const useTodoCreationMutationCallback = useCallback(() => useMutation<useTodoCreationMutation>(todoCreationMutation), []);
 
     useEffect(() => {
@@ -33,5 +33,3 @@ const useTodoCreationMutationHook = () => {
     return useTodoCreationMutationCallback;
 
 };
-
-export default useTodoCreationMutationHook;

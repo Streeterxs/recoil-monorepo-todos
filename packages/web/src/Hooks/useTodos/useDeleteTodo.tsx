@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
 import { RecordProxy, ConnectionHandler } from 'relay-runtime';
 
-import { useTodoDeleteMutation } from '@StreeterxsTodos/relay';
+import { useTodoDelete } from '@StreeterxsTodos/relay';
 
 const useDeleteTodo = (): [(id: string) => void, boolean] => {
 
-    const [todoCommitDeleteMutation, todoDeleteIsInFlight] = useTodoDeleteMutation()();
+    const [todoCommitDeleteMutation, todoDeleteIsInFlight] = useTodoDelete()();
 
 
     const deleteTodo = useCallback((id: string) => {

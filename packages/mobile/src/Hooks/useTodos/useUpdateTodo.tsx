@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 
-import { useTodoUpdateMutation } from '@StreeterxsTodos/relay';
+import { useTodoUpdate } from '@StreeterxsTodos/relay';
 
 const useUpdateTodo = (): [(content: string, id: string) => void, boolean] => {
 
-    const [todoCommitUpdateMutation, todoUpdateIsInFlight] = useTodoUpdateMutation()();
+    const [todoCommitUpdateMutation, todoUpdateIsInFlight] = useTodoUpdate()();
 
     const updateTodo = useCallback((content: string, id: string) => {
 

@@ -19,7 +19,7 @@ const todoDeleteMutation = graphql`
     }
 `;
 
-const useTodoDeleteMutationHook = () => {
+export const useTodoDelete = () => {
     const useTodoDeleteMutationCallback = useCallback(() => useMutation<useTodoDeleteMutation>(todoDeleteMutation), []);
 
     useEffect(() => {
@@ -29,5 +29,3 @@ const useTodoDeleteMutationHook = () => {
     return useTodoDeleteMutationCallback;
 
 };
-
-export default useTodoDeleteMutationHook;
